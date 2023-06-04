@@ -4,11 +4,11 @@ class productManager {
         }
 
     addProduct = (title, description, price, thumbnail, code, stock) => {
-        if (!title || !description || price === 0 || !thumbnail || !code) { // verifica que los valores estén vacios o que el precio sea 0, el stock puede ser 0.
+        if (!title || !description || price === 0 || !thumbnail || !code) { 
             console.log(`Check ${code} parameters: all parameters are mandatory, only stock can be 0`);
             return false;
           } else {
-            const checkproduct = this.#checkCode(code) // verifica que el código no exita.
+            const checkproduct = this.#checkCode(code) 
             if (checkproduct==='OK') {
                 const product = {
                     code: code,
@@ -17,7 +17,7 @@ class productManager {
                     price: price,
                     thumbnail: thumbnail,
                     stock: stock,
-                    id: this.#getMaxID() + 1, // busca el max id creado para crear el siguiente
+                    id: this.#getMaxID() + 1, 
                 }
                 this.products.push(product)
                 console.log(`Product ${code} created`)
@@ -44,7 +44,7 @@ class productManager {
         return this.products
     }
 
-    #getMaxID = () => { // busca el ultimo ID creado
+    #getMaxID = () => { 
         const ids = this.products.map(product => product.id)
         if (ids.includes(1)) {
             return Math.max(...ids)
@@ -52,7 +52,7 @@ class productManager {
             return 0}
     }
 
-    #checkCode=(codeProduct)=>{ // busca un codigo de producto y devuelve OK si no existe, y Error si existe.
+    #checkCode=(codeProduct)=>{ 
         if (!this.products.find(product => product.code === codeProduct)) {
             const estado = 'OK'
             return estado
@@ -65,11 +65,7 @@ class productManager {
 
 
 const manager = new productManager()
-// manager.getProducts()
-// manager.addProduct('producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25)
-// manager.getProducts()
-// manager.addProduct('producto prueba','Este es un producto prueba',200,'Sin imagen','abc123',25)
-// manager.getProductById(1)
+
 
 manager.addProduct('Queque redvelvet','Queque de redvelvet',10000,'Sin imagen','PT001',0) // stock en 0 OK
 manager.addProduct('Queque vainilla','Queque de vainilla decorado',15000,'Sin imagen','PT001',5) // Error: codigo existente
